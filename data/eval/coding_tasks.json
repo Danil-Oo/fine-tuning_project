@@ -1,0 +1,95 @@
+[
+  {
+    "id": "code_001",
+    "prompt": "Write a Python function `flatten(lst)` that flattens a nested list of arbitrary depth into a single flat list.\n\nExample:\n  flatten([1, [2, [3, 4]], 5]) == [1, 2, 3, 4, 5]\n  flatten([]) == []",
+    "difficulty": "easy",
+    "category": "recursion",
+    "test_cases": [
+      {"input": [[1, [2, [3, 4]], 5]], "expected": [1, 2, 3, 4, 5]},
+      {"input": [[]], "expected": []},
+      {"input": [[1, 2, 3]], "expected": [1, 2, 3]},
+      {"input": [[[[[1]]]]], "expected": [1]},
+      {"input": [[1, [2], [3, [4, [5]]]]], "expected": [1, 2, 3, 4, 5]}
+    ],
+    "test_code": "def run_tests(fn):\n    assert fn([1, [2, [3, 4]], 5]) == [1, 2, 3, 4, 5]\n    assert fn([]) == []\n    assert fn([1, 2, 3]) == [1, 2, 3]\n    assert fn([[[[[1]]]]]) == [1]\n    assert fn([1, [2], [3, [4, [5]]]]) == [1, 2, 3, 4, 5]\n    return True"
+  },
+  {
+    "id": "code_002",
+    "prompt": "Write a Python function `is_balanced(s)` that checks if a string with parentheses, square brackets, and curly braces is balanced.\n\nExample:\n  is_balanced('({[]})') == True\n  is_balanced('([)]') == False\n  is_balanced('') == True",
+    "difficulty": "easy",
+    "category": "stack",
+    "test_cases": [
+      {"input": ["({[]})"], "expected": true},
+      {"input": ["([)]"], "expected": false},
+      {"input": [""], "expected": true},
+      {"input": ["((())"], "expected": false},
+      {"input": ["{[()]}"], "expected": true},
+      {"input": [")))"], "expected": false}
+    ],
+    "test_code": "def run_tests(fn):\n    assert fn('({[]})') == True\n    assert fn('([)]') == False\n    assert fn('') == True\n    assert fn('((()') == False\n    assert fn('{[()]}') == True\n    assert fn(')))') == False\n    return True"
+  },
+  {
+    "id": "code_003",
+    "prompt": "Write a Python function `lru_cache_manual(capacity)` that returns an LRU Cache object with `get(key)` and `put(key, value)` methods.\n\n- `get(key)`: return value if key exists, else -1\n- `put(key, value)`: insert or update. If capacity exceeded, evict least recently used.\n\nDo not use functools.lru_cache.",
+    "difficulty": "medium",
+    "category": "data_structures",
+    "test_cases": [],
+    "test_code": "def run_tests(fn):\n    cache = fn(2)\n    cache.put(1, 1)\n    cache.put(2, 2)\n    assert cache.get(1) == 1\n    cache.put(3, 3)  # evicts key 2\n    assert cache.get(2) == -1\n    assert cache.get(3) == 3\n    cache.put(4, 4)  # evicts key 1\n    assert cache.get(1) == -1\n    assert cache.get(3) == 3\n    assert cache.get(4) == 4\n    return True"
+  },
+  {
+    "id": "code_004",
+    "prompt": "Write a Python function `group_anagrams(words)` that groups a list of strings into lists of anagrams.\n\nExample:\n  group_anagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat'])\n  == [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']] (order within groups and order of groups may vary)",
+    "difficulty": "easy",
+    "category": "hash_map",
+    "test_cases": [],
+    "test_code": "def run_tests(fn):\n    result = fn(['eat', 'tea', 'tan', 'ate', 'nat', 'bat'])\n    result_sorted = sorted([sorted(g) for g in result])\n    expected_sorted = sorted([sorted(g) for g in [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]])\n    assert result_sorted == expected_sorted\n    assert fn([]) == []\n    single = fn(['a'])\n    assert len(single) == 1 and 'a' in single[0]\n    return True"
+  },
+  {
+    "id": "code_005",
+    "prompt": "Write a Python function `longest_common_subsequence(s1, s2)` that returns the length of the longest common subsequence of two strings.\n\nExample:\n  longest_common_subsequence('abcde', 'ace') == 3\n  longest_common_subsequence('abc', 'abc') == 3\n  longest_common_subsequence('abc', 'def') == 0",
+    "difficulty": "medium",
+    "category": "dynamic_programming",
+    "test_cases": [],
+    "test_code": "def run_tests(fn):\n    assert fn('abcde', 'ace') == 3\n    assert fn('abc', 'abc') == 3\n    assert fn('abc', 'def') == 0\n    assert fn('', 'abc') == 0\n    assert fn('bl', 'yby') == 1\n    assert fn('ezupkr', 'ubmrapg') == 2\n    return True"
+  },
+  {
+    "id": "code_006",
+    "prompt": "Write a Python function `decode_ways(s)` that counts the number of ways to decode a string of digits, where 'A'=1, 'B'=2, ..., 'Z'=26.\n\nExample:\n  decode_ways('12') == 2  # 'AB' or 'L'\n  decode_ways('226') == 3  # 'BZ', 'VF', 'BBF'\n  decode_ways('06') == 0",
+    "difficulty": "medium",
+    "category": "dynamic_programming",
+    "test_cases": [],
+    "test_code": "def run_tests(fn):\n    assert fn('12') == 2\n    assert fn('226') == 3\n    assert fn('06') == 0\n    assert fn('0') == 0\n    assert fn('1') == 1\n    assert fn('11106') == 2\n    return True"
+  },
+  {
+    "id": "code_007",
+    "prompt": "Write a Python function `word_frequency(text)` that takes a string and returns a dictionary with word frequencies, case-insensitive, ignoring punctuation.\n\nExample:\n  word_frequency('Hello, hello world!') == {'hello': 2, 'world': 1}",
+    "difficulty": "easy",
+    "category": "strings",
+    "test_cases": [],
+    "test_code": "import re\ndef run_tests(fn):\n    result = fn('Hello, hello world!')\n    assert result == {'hello': 2, 'world': 1}\n    assert fn('') == {}\n    result2 = fn('The cat sat on the mat.')\n    assert result2['the'] == 2\n    assert result2['cat'] == 1\n    return True"
+  },
+  {
+    "id": "code_008",
+    "prompt": "Write a Python function `merge_intervals(intervals)` that merges all overlapping intervals.\n\nExample:\n  merge_intervals([[1,3],[2,6],[8,10],[15,18]]) == [[1,6],[8,10],[15,18]]\n  merge_intervals([[1,4],[4,5]]) == [[1,5]]",
+    "difficulty": "medium",
+    "category": "arrays",
+    "test_cases": [],
+    "test_code": "def run_tests(fn):\n    assert fn([[1,3],[2,6],[8,10],[15,18]]) == [[1,6],[8,10],[15,18]]\n    assert fn([[1,4],[4,5]]) == [[1,5]]\n    assert fn([[1,4]]) == [[1,4]]\n    assert fn([]) == []\n    assert fn([[1,4],[0,2],[3,5]]) == [[0,5]]\n    return True"
+  },
+  {
+    "id": "code_009",
+    "prompt": "Write a Python class `MinStack` that supports `push(val)`, `pop()`, `top()`, and `get_min()` operations, all in O(1) time.\n\n`get_min()` should return the minimum element in the stack.",
+    "difficulty": "medium",
+    "category": "data_structures",
+    "test_cases": [],
+    "test_code": "def run_tests(cls):\n    s = cls()\n    s.push(-2)\n    s.push(0)\n    s.push(-3)\n    assert s.get_min() == -3\n    s.pop()\n    assert s.top() == 0\n    assert s.get_min() == -2\n    s.push(1)\n    assert s.get_min() == -2\n    return True"
+  },
+  {
+    "id": "code_010",
+    "prompt": "Write a Python function `count_islands(grid)` that counts the number of islands in a 2D grid, where '1' is land and '0' is water.\n\nExample:\n  grid = [['1','1','0','0'],\n          ['1','1','0','0'],\n          ['0','0','1','0'],\n          ['0','0','0','1']]\n  count_islands(grid) == 3",
+    "difficulty": "medium",
+    "category": "graph",
+    "test_cases": [],
+    "test_code": "def run_tests(fn):\n    g1 = [['1','1','0','0'],['1','1','0','0'],['0','0','1','0'],['0','0','0','1']]\n    assert fn(g1) == 3\n    g2 = [['1','1','1'],['0','1','0'],['1','1','1']]\n    assert fn(g2) == 1\n    g3 = [['0','0'],['0','0']]\n    assert fn(g3) == 0\n    g4 = [['1']]\n    assert fn(g4) == 1\n    return True"
+  }
+]

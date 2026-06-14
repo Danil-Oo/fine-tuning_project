@@ -1,0 +1,40 @@
+# Секреты
+.env
+
+# Веса моделей (слишком большие для git)
+models/merged/
+models/gguf/
+models/llama.cpp/
+
+# LoRA адаптеры (regenerable через обучение)
+adapters/
+
+# MLflow данные (machine-specific, regenerable)
+mlflow/
+mlruns/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Кэши
+unsloth_compiled_cache/
+.ipynb_checkpoints/
+
+# Системные пакеты
+*.deb
+
+# Сгенерированные артефакты
+plots/
+
+# IDE
+.vscode/
+.idea/
+
+# Утилиты (не для репозитория)
+serving/
+migrate_mlflow.py
+scripts/recover_mlflow.py
